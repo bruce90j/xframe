@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>X-Frame</title>
+    <link rel="stylesheet" type="text/css" href="{% static "appmain/css/custom.min.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "appmain/css/bootstrap.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "appmain/css/bootstrap-icons/font/bootstrap-icons.css" %}"/>
+    {% block extra_head %}
+    {% endblock extra_head %}
+</head>
+
+<body class="bg-light p-2 mt-2">
+
+<div class="container m-auto text-center align-items-center">
+    <a class="nav-link" href="{% url 'appmain:home' %}">
+        <h1>X-Frame</h1>
+        <div class="mt-2">
+            <i class="bi bi-arrow-left-circle-fill"></i>
+        </div>
+    </a>
+    {% block content %}
+    {% endblock content %}
+</div>
+
+
+{#<script src="{% static "appmain/js/custom.js" %}"></script>#}
+<script src="{% static "appmain/js/bootstrap.bundle.min.js" %}"></script>
+
+{% block extra_scripts %}
+{% endblock extra_scripts %}
+
+</body>
+</html>

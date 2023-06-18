@@ -1,0 +1,9 @@
+.credits {
+  position: absolute;
+  font-size: 11px;
+  display: flex;
+  bottom: 2%;
+  right: 45%;
+  animation: creditsAnimation 0s 7s forwards;
+  visibility: visible;
+}

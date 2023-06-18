@@ -1,0 +1,31 @@
+{% extends 'registration/base_registration.html' %}
+{% load static %}
+
+{% block extra_head %}
+{% endblock extra_head %}
+
+{% block content %}
+<div class="card mx-auto col-lg-4 mt-4 shadow">
+    <div class="card-body">
+        <h4 class="card-title mt-2">Connect Wallet</h4>
+        <ul class="pagination list-group mt-4">
+            <li class="page-link list-group-item">
+                <a href="{% url 'appmain:connect_xumm_wallet' %}" class="nav-link d-flex justify-content-between align-items-center">
+                    <strong>XUMM</strong>
+                    <span class="badge rounded-pill"><img height="16px" src="{% static 'appmain/assets/xumm.svg' %}"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <form id="xumm_form" method="POST">
+        {% csrf_token %}
+        <input type="text" id="xumm_uuid" name="xumm_uuid" hidden/>
+    </form>
+</div>
+{% endblock content %}
+
+
+
+{% block extra_scripts %}
+{% endblock extra_scripts %}
