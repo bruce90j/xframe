@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'compressor',
     'rest_framework',
     'rest_framework.authtoken',
     'mathfilters',
@@ -56,22 +55,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-# DJANGO COMPRESSOR SETTINGS
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = os.getenv("DEBUG")=="False"
-
-COMPRESS_FILTERS = {
-    'css': ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.rCSSMinFilter'],
-    'js': ['compressor.filters.jsmin.CalmjsFilter']
-}
-
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-]
-# END DJANGO COMPRESSOR SETTINGS
 
 ROOT_URLCONF = 'xframe.urls'
 

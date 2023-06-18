@@ -5,7 +5,6 @@ from django.contrib.auth import logout, login
 from django.urls import reverse
 from django.views import View
 from django.conf import settings
-from django.views.generic import CreateView
 
 from appmain.helpers import xumm_helper
 from appmain.permission_manager import WalletOrUserRequiredMixin
