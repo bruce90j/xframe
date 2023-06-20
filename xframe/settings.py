@@ -91,6 +91,13 @@ DATABASES = {
         'PORT': os.getenv("POSTGRES_PORT"),
     },
 }
+# Delete the DATABASES definiton above and Uncomment the following lines to use the sqlite database
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": "mydatabase",
+#     }
+# }
 
 
 # Password validation
