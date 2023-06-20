@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block extra_head %}
+        <title>X-Frame</title>
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static "appmain/css/custom.min.css" %}"/>
+{#    <link id="theme" rel="stylesheet" type="text/css" href="https://bootswatch.com/5/sketchy/bootstrap.css"/>#}
+    <link rel="stylesheet" type="text/css" href="{% static "appmain/css/bootstrap.css" %}"/>
+    <link rel="stylesheet" href="{% static "appmain/css/bootstrap-icons/font/bootstrap-icons.css" %}"/>
+
+
+</head>
+
+<body>
+<div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/">X-Frame</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav me-auto">
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link active" href="#">Explore#}
+{#                        <span class="visually-hidden">(current)</span>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="#">Pricing</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="#">About</a>#}
+{#                </li>#}
+            </ul>
+            <ul class="navbar-nav ms-md-auto">
+{#                <select id="theme_selector" class="form-select"></select>#}
+                {% if request.session.xumm_account %}
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+                          <img alt="" height="16px" src="{% static 'appmain/assets/xumm.svg' %}"> {{ request.session.xumm_account|truncatechars:8 }}
+                      </a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'appmain:logout' %}">Disconnect</a>
+                      </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'appmain:connect_wallet' %}"><i class="bi bi-wallet"></i> Connect Wallet</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+                    <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+                    <hr class="d-lg-none my-2 text-white-50">
+                </li>
+                <li class="nav-item">
+                    <a target="_blank" rel="noopener" class="nav-link" href="https://github.com/bruce90j/xframe"><i
+                            class="bi bi-github"></i><span class="d-lg-none ms-2">GitHub</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% block main_content %}
+
+    <div class="section-title jumbotron">
+        <div class="container">
+            <h1 class="display-3">X-Frame</h1>
+            <p class="lead">a Metaverse starter kit.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="aframe" role="button">Try it now</a>
+            </p>
+        </div>
+    </div>
+    <div class="section-tout">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 text-dark">
+                    <div class="icon"><i class="bi bi-code-slash"></i></div>
+                    <h4><a class="text-dark" href="https://www.djangoproject.com/">Django</a></h4>
+                    <p>The web framework for perfectionists with deadlines.</p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-dark">
+                    <div class="icon"><i class="bi bi-badge-3d"></i></div>
+                    <h4><a class="text-dark" href="https://aframe.io/">A-frame</a></h4>
+                    <p>A web framework for building 3D/AR/VR experiences</p>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-dark">
+                    <div class="icon"><i class="bi bi-bounding-box"></i></div>
+                    <h4><a class="text-dark" href="https://xrpl.org/">XRPL</a></h4>
+                    <p>A decentralized, public blockchain led by a global developer community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+<script src="{% static "appmain/js/custom.js" %}"></script>
+<script src="{% static "appmain/js/bootstrap.bundle.min.js" %}"></script>
+
+{% block extra_script %}
+
+{% endblock %}
+
+</body>
+</html>
