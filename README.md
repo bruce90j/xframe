@@ -1,6 +1,10 @@
 # X-Frame
 a Metaverse starter kit that combines Django, A-Frame and XRPL.
 
+[Demo soon available here](https://github.com/bruce90j/xframe)
+
+![Alt text](xframe_screen.png "X-Frame")
+
 ## Environment setup
 Set the following environment variables in your system. 
 These variables are used by the `xframe/settings.py` file.
