@@ -1,7 +1,7 @@
 # X-Frame
 a Metaverse starter kit that combines Django, A-Frame and XRPL.
 
-[Demo soon available here](https://github.com/bruce90j/xframe)
+[Demo available here](https://xframe.trilab.dev)
 
 ![Alt text](xframe_screen.png "X-Frame")
 
