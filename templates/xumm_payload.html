@@ -1,0 +1,29 @@
+{% extends 'registration/base_registration.html' %}
+{% load static %}
+
+{% block content %}
+<div class="card mx-auto col-lg-4 mt-4 shadow">
+    <div class="card-body">
+        <h4 class="card-title mt-2">Sign payload</h4>
+        <img class="mt-2" width="256" height="256" src="{{ xumm_qr }}">
+        <p class="card-text text-xs mt-2"><small>Scan the QR code with Xumm to proceed.</small></p>
+        <p class="spinner-border text-primary" role="status"></p>
+        <div id="xumm_button" hidden>
+            <a href="{{ xumm_lk }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open XUMM</a>
+        </div>
+    </div>
+    <form id="xumm_form" method="POST">
+        {% csrf_token %}
+        <input type="text" id="xumm_uuid" name="xumm_uuid" hidden/>
+    </form>
+</div>
+{% endblock content %}
+
+
+
+{% block extra_scripts %}
+    <script src="{% static 'appmain/js/connect-xumm-wallet.js' %}"></script>
+<script>
+    walletListener('{{ xumm_ws }}');
+</script>
+{% endblock extra_scripts %}

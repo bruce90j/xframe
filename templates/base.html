@@ -47,7 +47,8 @@
                           <img alt="" height="16px" src="{% static 'appmain/assets/xumm.svg' %}"> {{ request.session.xumm_account|truncatechars:8 }}
                       </a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'appmain:logout' %}">Disconnect</a>
+                        <a class="dropdown-item" href="{% url 'appmain:profile' %}"><i class="bi bi-person"></i> Account</a>
+                        <a class="dropdown-item" href="{% url 'appmain:logout' %}"><i class="bi bi-x-circle"></i> Disconnect</a>
                       </div>
                     </li>
                 {% else %}
