@@ -15,13 +15,16 @@ class AframeView(WalletOrUserRequiredMixin, View):
 
     def get(self, request):
         nfts = []
-        # for nft in x_helper.get_nft(request.session['xumm_account'])['account_nfts']:
-        #     try:
-        #         link = bytearray.fromhex(nft['URI']).decode()
-        #         response = urlopen(link, timeout=3)
-        #         nfts.append(json.loads(response.read())['image_url'])
-        #     except:
-        #         pass
+        for nft in x_helper.get_nft(request.session['xumm_account'])['account_nfts']:
+            try:
+                link = bytearray.fromhex(nft['URI']).decode()
+                response = urlopen(link, timeout=3)
+                img = json.loads(response.read())['image_url']
+                if "ipfs" in img:
+                    img = 'https://ipfs.io/ipfs/' + img.split('ipfs/')[1]
+                nfts.append(img)
+            except:
+                pass
         return render(request, self.template_path, {
             'local': settings.DEBUG,
             'my_nfts': nfts

@@ -24,7 +24,6 @@ class AccountView(View):
     page_title = "Profile"
 
     def get(self, request):
-        # request.session['xumm_account'] = 'rntaS4R2KT4hbV1uNEbkYfUrW1zj6csvhQ'
         return render(request, self.template_path, { })
 
 
