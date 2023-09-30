@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <title>Mint NFT</title>
+{% endblock %}
+
+{% block main_content %}
+    <div class="container mt-2">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    <label for="nft_name" class="col-sm-2 col-form-label">Name</label>
+                    <input type="text" class="form-control" placeholder="Name" id="nft_name" name="nft_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="nft_description" class="col-sm-2 col-form-label">Description</label>
+                    <input type="text" class="form-control" placeholder="Description" id="nft_description" name="nft_description" required>
+                </div>
+                <div class="form-group">
+                    <label for="nft_image_url" class="col-sm-2 col-form-label">Image url</label>
+                    <input type="text" class="form-control" placeholder="https://" id="nft_image_url" name="nft_image_url" required>
+                </div>
+                <div class="form-group">
+                    <label for="nft_animation_url" class="col-sm-2 col-form-label">Animation url</label>
+                    <input type="text" class="form-control" placeholder="https://" id="nft_animation_url" name="nft_animation_url">
+                </div>
+                <div class="mt-2 form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="nft_send_to_ipfs">
+                    <label class="form-check-label" for="nft_send_to_ipfs">Add to IPFS</label>
+                </div>
+            </fieldset>
+            <input class="btn btn-success mt-2" type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+
+{% endblock %}

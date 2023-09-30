@@ -65,6 +65,11 @@
             movement-controls="constrainToNavMesh: true; speed: 0.1;">
         <a-entity id="player" camera player-info position="0 1.6 0" look-controls></a-entity>
     </a-entity>
+
+    {% for nft in my_nfts %}
+{#        <a-text value="{{ nft }}" position="-4.9 1.8 {{ forloop.counter }}" rotation="0 90 0" width="1" wrapCount="24" color="black"></a-text>#}
+         <a-image position="-4.9 1.4 {{ forloop.counter }}" rotation="0 90 0" src="{{ nft }}"></a-image>
+    {% endfor %}
 </a-scene>
 
 <div class="credits">

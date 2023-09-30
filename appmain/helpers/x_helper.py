@@ -9,7 +9,7 @@ from xrpl.models.requests.account_info import AccountInfo
 from django.conf import settings
 
 sdk = xumm.XummSdk(settings.XUMM_API_KEY, settings.XUMM_API_SECRET)
-xrpc = JsonRpcClient("https://s.altnet.rippletest.net:51234/")
+xrpc = JsonRpcClient("https://s.altnet.rippletest.net:51234/")  # https://s2.ripple.com/
 
 
 def create_payload(payload):
@@ -20,7 +20,8 @@ def create_payload(payload):
 def get_payload(uuid):
     payload = sdk.payload.get(uuid)
     # return payload.response
-    return json.dumps(payload.to_dict(), indent=4)
+    return payload
+    # return json.dumps(payload.to_dict(), indent=4)
 
 
 def cancel_payload(uuid):
@@ -115,3 +116,15 @@ def verify_transaction(tx_hash):
         tx = e
         return tx
     return json.dumps(tx.to_dict(), indent=4)
+
+'''_______________ Connector ________________ '''
+
+
+def request_payload(action, data, user_token=""):
+    match action:
+        case "mint_nft":
+            return mint_nft(data, user_token)
+        case "burn_nft":
+            return burn_nft(data, user_token)
+        case _:
+            return False

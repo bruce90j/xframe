@@ -41,13 +41,14 @@
             </ul>
             <ul class="navbar-nav ms-md-auto">
 {#                <select id="theme_selector" class="form-select"></select>#}
+                <li class="nav-item me-2 py-2 py-lg-1 col-12 col-lg-auto text-warning" disabled="">network: s.altnet.rippletest.net:51234</li>
                 {% if request.session.xumm_account %}
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                           <img alt="" height="16px" src="{% static 'appmain/assets/xumm.svg' %}"> {{ request.session.xumm_account|truncatechars:8 }}
                       </a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'appmain:profile' %}"><i class="bi bi-person"></i> Account</a>
+                        <a class="dropdown-item" href="{% url 'appmain:account' %}"><i class="bi bi-person"></i> Account</a>
                         <a class="dropdown-item" href="{% url 'appmain:logout' %}"><i class="bi bi-x-circle"></i> Disconnect</a>
                       </div>
                     </li>
@@ -77,7 +78,7 @@
             <img class="float-end" height="120px" src="{% static "appmain/assets/xframe-logo.png" %}"> <h2 class="display-3">X-Frame</h2>
             <p class="lead">a Metaverse starter kit.</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="aframe" role="button">Try it now</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'appaframe:aframe' %}" role="button">Try it now</a>
             </p>
         </div>
     </div>

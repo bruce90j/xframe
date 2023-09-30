@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <title>Account</title>
+{% endblock %}
+
+{% block main_content %}
+    <div class="container mt-2">
+        <div class="container">
+            <div><i class="bi bi-wallet"></i> <span class="text-muted">{{ request.session.xumm_account }}</span></div>
+            <div><i class="bi bi-coin"></i> <span id="xrp_balance" class="text-muted"></span></div>
+        </div>
+        <div id="tab_nft_content" class="row mx-auto">
+            <div class="col-12 col-lg-3 col-sm-6 mt-3">
+                <a class="card mb-3" href="{% url 'appmain:nft-create' %}">
+                    <p class="card-body text-sm-center">Mint a new NFT</p>
+                    <img class="d-block user-select-none" height="180" style="width: 100%; object-fit: scale-down;" src="{% static 'appmain/assets/icon-add.png' %}">
+                    <div class="card-body">
+                    </div>
+                </a>
+            </div>
+            {#   NFT CONTENT HERE  #}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script src="https://unpkg.com/xrpl/build/xrpl-latest-min.js"></script>
+    <script src="{% static 'appmain/js/xhelper.js' %}"></script>
+    <script>
+        loadAccountBalances("{{ request.session.xumm_account }}").then((balances) => {
+          for (var i = 0; i < balances.length; i++) {
+                if (balances[i].currency === "XRP") {
+                    document.getElementById("xrp_balance").innerHTML = parseFloat(balances[i].value).toFixed(2) + " XRP";
+                }
+            }
+        });
+
+        loadAccountNFTs("{{ request.session.xumm_account }}").then((nfts) => {
+            for(var i = 0; i < nfts.length; i++) {
+                try {
+                  fetchNFTMetadata(hex2a(nfts[i].URI)).then((data) => {
+                        addNFTelement(data);
+                      }
+                  );
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        });
+    </script>
+
+    <script>
+        function truncate(str, n){
+          return (str.length > n) ? str.slice(0, n-1) + '&hellip;' : str;
+        }
+    </script>
+
+    <script>
+        function addNFTelement(data) {
+            if (!data.image_url) return;
+            let image = data.image_url;
+            if(image.includes("ipfs")){
+                image = 'https://ipfs.io/ipfs/' + image.split('ipfs/')[1];
+            }
+
+            const nft_div = document.createElement("div");
+            nft_div.classList.add('col-12', 'col-lg-3', 'col-sm-6', 'mt-3');
+
+            const sub_div = document.createElement("div");
+            sub_div.classList.add('mb-3', 'card', 'border-primary');
+
+            const title_div = document.createElement("p");
+            title_div.classList.add('card-header', 'text-sm-center');
+            title_div.innerText = truncate(data.name, 30);
+
+            const nft_img = document.createElement("img");
+            nft_img.classList.add('d-block', 'user-select-none');
+            nft_img.setAttribute("height", "200");
+            {#nft_img.setAttribute("width", "100%");#}
+            nft_img.setAttribute("style", "width: 100%; object-fit: cover;");
+            nft_img.setAttribute("src", image);
+
+            const description_div = document.createElement("div");
+            description_div.classList.add('card-body');
+            description_div.innerHTML = '<p class="card-text text-sm-start">' + truncate(data.description, 30) + '</p>'
+
+            sub_div.appendChild(title_div);
+            sub_div.appendChild(nft_img);
+            sub_div.appendChild(description_div);
+            nft_div.appendChild(sub_div);
+
+
+            document.getElementById("tab_nft_content").appendChild(nft_div);
+        }
+    </script>
+{% endblock %}
